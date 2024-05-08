@@ -1,15 +1,56 @@
 \section{Introduction}
-awf
+The dynamics of a shaft in three systems is considered:
+\begin{itemize}
+    \item (I) Only shaft
+    \item (II) Shaft and \SI{100}{\milli \meter} disc
+    \item (III) Shaft, \SI{100}{\milli \meter} and \SI{80}{\milli \meter} discs
+\end{itemize}
+Both the unsupport shaft and the shaft supported by ball bearing and hydrodynamic bearing are considered. The dimensions of the shaft and discs is given in \cite[Appendix]{Problem}.
+The shaft and both discs is made in ST60 steel with mechanical properties shown in table \ref{tab:mech_prop}.
+\begin{table}[htbp]
+    \centering
+    \caption{Mechanical Properties of ST60 Steel}
+    \label{tab:mech_prop}
+    \begin{tabular}{@{}cccc@{}}
+        \toprule
+        Density                                     &   Poisson Ratio   &   Elastic Modulus         &   Yield Strength \\ \midrule
+        \SI{7.85e3}{\kilo \gram \per \cubic \meter} &   0.3             &   \SI{210}{\giga \pascal} &   \SI{390}{\mega \pascal}                               \\ \bottomrule
+    \end{tabular}
+\end{table}
+
 \section{Lateral Dynamics of Flexible Shaft}
-zsc
+The first step is creating a model of the shaft. The model is compared to a experimental result and adjusted accordingly.
+
 \subsection{Modelling}
-zdc
+From the technical drawings in \cite[Appendix]{Problem} the shaft can be modelled and analyzed.
+
 \subsubsection{Mechanical model}
-zd
+The shaft is drawn in solidworks to calculate the mass and moment of inertia. When doing so some simplifications are done.
+The keyways at the ends of the shafts are neglected and the small fillets are not included. Other small features, namely the screw hole at the end and the two small flanges on the shaft is likewise neglected.
+The resulting geometry is perfectly balanced with the mass and moment of inertia shown in table \ref{tab:shaft_mass_moment}.
+\begin{table}[htbp]
+    \centering
+    \caption{Mass and Moment of Inertia of Shaft}
+    \label{tab:shaft_mass_moment}
+    \begin{tabular}{@{}cc@{}}
+        \toprule
+        Mass                    &   Moment of Inertia                       \\ \midrule
+        \SI{0.5}{\kilo \gram}   &   \SI{0.0001}{\kilo \gram \square \meter} \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+Other assumptions:
+
 \subsubsection{Mathematical model}
-zxc
+3 mathematical models are discretized from the mechanical model with increasing number of elements.
+
+\subsubsection{Undamped natural frequencies}
+To calculate the undamped natural frequencies of the shaft the three mathematical models are used. To make the system solveable a small bearing stiffnes of \SI{e1}{\giga \pascal} is added.
+
 \subsubsection{Convergence}
-xczs
+To compare the three mathematical models, a convergence study is done. Here the 4 lowest (non rigid body) natural frequencies are compared. The results are shown in table xxx.
+
+
 \subsection{Validation}
 sdv
 \subsection{Model adjustment}
