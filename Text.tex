@@ -14,7 +14,7 @@ The shaft and both discs is made in ST60 steel with mechanical properties shown 
     \begin{tabular}{@{}cccc@{}}
         \toprule
         Density                                     &   Poisson Ratio   &   Elastic Modulus         &   Yield Strength \\ \midrule
-        \SI{7.85e3}{\kilo \gram \per \cubic \meter} &   0.3             &   \SI{210}{\giga \pascal} &   \SI{390}{\mega \pascal}                               \\ \bottomrule
+        \SI{7800}{\kilo \gram \per \cubic \meter} &   0.3             &   \SI{200}{\giga \pascal} &   \SI{390}{\mega \pascal}                               \\ \bottomrule
     \end{tabular}
 \end{table}
 
@@ -42,45 +42,171 @@ The resulting geometry is perfectly balanced with the mass and moment of inertia
 Other assumptions:
 
 \subsubsection{Mathematical model}
-3 mathematical models are discretized from the mechanical model with increasing number of elements.
+3 mathematical models are discretized from the mechanical model with increasing number of elements. The coarse model is seen a as a shaft with constant diameter of \SI{90}{\milli \meter} and length of \SI{1150}{\milli \meter}. The coarse model is discretized into 18 equal length elements.
+The fine model have more complex geometry. Here the shaft is broken up into 6 section with varying diameter and length, each with one element. This includes more of the intrecasiess of the orginal geometry.
+The Very fine model have the same 6 sections as the fine model, but discretizes the sections with more elements. The very fine mesh consist of 17 elements in total.
 
 \subsubsection{Undamped natural frequencies}
-To calculate the undamped natural frequencies of the shaft the three mathematical models are used. To make the system solveable a small bearing stiffnes of \SI{e1}{\giga \pascal} is added.
+To calculate the undamped natural frequencies of the shaft the three mathematical models are used. To make the system solveable a very small bearing stiffnes of \SI{0.01}{\pascal} is added.
 
 \subsubsection{Convergence}
-To compare the three mathematical models, a convergence study is done. Here the 4 lowest (non rigid body) natural frequencies are compared. The results are shown in table xxx.
-
+To compare the three mathematical models, a convergence study is done. Here the 4 lowest (non rigid body) natural frequencies are compared.
+The resulting natural frequencies are shown in table \ref{tab:natural_freq}.
+\begin{table}[htbp]
+    \centering
+    \caption{Undamped Natural Frequencies of Shaft}
+    \label{tab:natural_freq}
+    \begin{tabular}{@{}cccc@{}}
+        \toprule
+        Mode    &   Coarse Model (\si{\hertz})    &   Fine Model (\si{\hertz})  &   Very Fine Model (\si{\hertz}) \\ \midrule
+        1       &   303.9   &   392.9   &   371.4   \\
+        2       &   828.5   &   1066.2  &   916     \\
+        3       &   1601.5  &   1786.4  &   1612.2  \\
+        4       &   2602.7  &   3660.2  &   2550.7  \\ \bottomrule
+    \end{tabular}
+\end{table}
 
 \subsection{Validation}
-sdv
+The experimental results from \cite[6]{Problem} is compared to the mathematical model. The experimantal natural frequencies and the discrepancy between the 3 mathematical models and the experimental results is shown in table \ref{tab:validation}.
+
+\begin{table}[htbp]
+    \begin{adjustwidth}{-1cm}{-1cm}
+    \centering
+    \caption{Validation of Mathematical Model}
+    \label{tab:validation}
+    \begin{tabular}{@{}ccccc@{}}
+        \toprule
+        Mode    &   Experimental (\si{\hertz})    &   Coarse Model (\si{\percent})    &   Fine Model (\si{\percent})  &   Very Fine Model (\si{\percent}) \\ \midrule
+        1       &   388     &   21.7   &   -1.3   &   4.3   \\
+        2       &   930     &   10.9   &   -14.7  &   1.5     \\
+        3       &   1689    &   5.2  &   -5.8  &   4.6  \\
+        4       &   2624    &   0.8  &   -39.5  &   2.8  \\ \bottomrule
+    \end{tabular}
+    \end{adjustwidth}
+\end{table}
+
+
 \subsection{Model adjustment}
-ase
+As the very fine model is within \SI{5}{\percent} of the experimental results, this model is deemed accurate enough for further analysis. This model is choosen for further analysis and is refered to as system (I)
+
 \section{Lateral Dynamics of Flexible Shaft and Discs}
-sdfxc
+The next step is to add the discs to the shaft. The same procedure as before is done. First the \SI{80}{\milli \meter} disc is added and then the \SI{100}{\milli \meter} disc is added.
+
 \subsection{Modelling}
-zscz
+As before the discs are drawn in solidworks to calculate the mass and moment of inertia. The resuting geometry is perfectly balanced with the mass and moment of inertia shown in table \ref{tab:disc_mass_moment}.
+
 \subsubsection{Mechanical model}
-zscz
+\begin{table}[htbp]
+    \centering
+    \caption{Mass and Moment of Inertia of Discs}
+    \label{tab:disc_mass_moment}
+    \begin{tabular}{@{}ccc@{}}
+        \toprule
+        Disc diamter    &   Mass                    &   Moment of Inertia                       \\ \midrule
+        \SI{80}{\milli \meter}\SI{0.5}{\kilo \gram}   &   \SI{0.0001}{\kilo \gram \square \meter} \\ 
+        \SI{100}{\milli \meter} &   \SI{0.4}{\kilo \gram}   &   \SI{0.001}{\kilo \gram \square \meter}\\ \bottomrule
+    \end{tabular}
+\end{table}
+
+The discs are assumed to be perfectly balanced. The internal details of the discs are neglected.
+The model is assumed rigid with only rigid body motion. 
+
 \subsubsection{Mathematical model - one disc}
-zxcz
+The mass and moment of inertia of the \SI{100}{\milli \meter} disc is added to the mathematical model of the shaft, in the node corresponding to the placement seen in \cite[Appendix]{Problem}.
+As the disc is assumed to be rigid the extra stifness of the disc is not added.
+
+The natural frequencies of the system is calculated and shown in table \ref{tab:natural_freq_one_disc}.
+\begin{table}[htbp]
+    \centering
+    \caption{Undamped Natural Frequencies of Shaft and One Disc}
+    \label{tab:natural_freq_one_disc}
+    \begin{tabular}{@{}cc@{}}
+        \toprule
+        Mode    &   Natural Frequency (\si{\hertz})    \\ \midrule
+        1       &   288.8   \\
+        2       &   596.5   \\
+        3       &   1243.5  \\
+        4       &   1852.1  \\ 
+        5       &   2.283.5 \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+
+This model is refered to as system (II)
+
 \subsubsectionmark{Mathematical model - two discs}
-z d
+The mass and moment of inertia of the \SI{100}{\milli \meter} disc is added to the mathematical system (II) in the node corresponding to the placement seen in \cite[Appendix]{Problem}.
+The disc is assumed to be rigid and the extra stifness of the disc is not added.
+
+The natural frequencies of the system is calculated and shown in table \ref{tab:natural_freq_two_discs}.
+\begin{table}[htbp]
+    \centering
+    \caption{Undamped Natural Frequencies of Shaft and Two Discs}
+    \label{tab:natural_freq_two_discs}
+    \begin{tabular}{@{}cc@{}}
+        \toprule
+        Mode    &   Natural Frequency (\si{\hertz})    \\ \midrule
+        1       &   242.5   \\
+        2       &   502.4   \\
+        3       &   929.8  \\
+        4       &   1262.9  \\ 
+        5       &   2276.9 \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+This model is refered to as system (III)
+
 \subsection{Validation}
-zxc
+With the natural frequencies of the systems (II) and (III) the experimental results from \cite[6]{Problem} is compared. The experimantal natural frequencies and the discrepancy between the mathematical models and the experimental results is shown in table \ref{tab:validation_two_discs}.
+\begin{table}[htbp]
+    \begin{adjustwidth}{-1cm}{-1cm}
+    \centering
+    \caption{Validation of Mathematical Model}
+    \label{tab:validation_two_discs}
+    \begin{tabular}{@{}ccccc@{}}
+        \toprule
+        Mode    &   Experimental (\si{\hertz})    &   System (II) (\si{\percent})    &   System (III) (\si{\percent})  \\ \midrule
+        1       &   241     &   4       &   -0.6    \\
+        2       &   498     &   10.8    &   -0.9    \\
+        3       &   708     &   7.8     &   -31.3   \\
+        4       &   1250    &   7.2     &   -1      \\ 
+        5       &   2350    &   4.2     &   3       \\ \bottomrule
+    \end{tabular}
+    \end{adjustwidth}
+\end{table}
+
+A major discrepancy is seen in the third mode of system (III). This is due to an interaction between the two discs. The model is adjusted to account for this.
+
 \subsection{Model adjustment}
-xdx
+As only one natural frequency is significantly off, both models is deemed accurate enough for further analysis.
+
+
 \section{Modelling of Ball Bearing}
-xdv
-\subsection{Der skal nok stå noget her -----------zzzzzzzxxxxxx}
-ælk
-\subsubsection{First 8 natural frequencies}
-xdv
-\subsubsection{First 8 mode shapes}
-xcv
+When including the ball bearings at the specified points on the shaft, system (I) is considered with the ball bearing stifness going from \SIrange{e1}{10e9}{\pascal}.
+The 8 first natural frequencies compared with the stifnees can be seen on figure \ref{fig:ball_bearing_stiffness}.
+\begin{figure}[htbp]
+    \centering
+    \input{04/OPG4a.tex}
+    \caption{The 8 lowest natural frequencies compared to ball bearing stiffness}
+    \label{fig:ball_bearing_stiffness}
+\end{figure}
+
+As expected, the lowest eigenfrequencies, at the lowest stiffness, can be considered rigid body movements with a very low natural frequency.
+With increasing stiffness the natural frequencies turns into the expected natural frequencies seen in xxxxxxxxxxxx -------- xxxxxxxxxxx indæst billeder.
+
 \subsection{Prediction of critical speeds}
-zdf
+Another important aspect of the shaft system is the critical speeds. The critical speed is the speed at which the exitaction frequency is the same as the natural frequency.
+
 \subsubsection{Campbell diagram}
-cfb
+The campbell diagram of system (I), (II) and (III) is shown in figure \ref{fig:campbell_diagram}.
+\begin{figure}[htbp]
+    \centering
+    \input{04/1/OPG4.1A.tex}
+    \caption{Campbell diagram of system (I), (II) and (III)}
+    \label{fig:campbell_diagram}
+\end{figure}
+
+
 \subsubsection{First mode shapes}
 cfbcv
 \subsection{Unbalance response}
