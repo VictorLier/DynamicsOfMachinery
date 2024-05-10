@@ -180,7 +180,6 @@ A major discrepancy is seen in the third mode of system (III). This is due to an
 \subsection{Model adjustment}
 As only one natural frequency is significantly off, both models is deemed accurate enough for further analysis.
 
-
 \section{Modelling of Ball Bearing}
 When including the ball bearings at the specified points on the shaft, system (I) is considered with the ball bearing stifness going from \SIrange{e1}{10e9}{\pascal}.
 The 8 first natural frequencies compared with the stifnees can be seen on figure \ref{fig:ball_bearing_stiffness}.
@@ -206,42 +205,178 @@ The campbell diagram of system (I), (II) and (III) is shown in figure \ref{fig:c
     \label{fig:campbell_diagram}
 \end{figure}
 
+Only the upper line - Forward
+
 
 \subsubsection{First mode shapes}
-cfbcv
-\subsection{Unbalance response}
-cfbc
+The first mode shape of system (I), (II) and (III) is shown in figure \ref{fig:first_mode_shape}.
+\begin{figure}[htbp]
+    \centering
+    \input{04/1/OPG4.1B.tex}
+    \caption{First mode shape of system (I), (II) and (III)}
+    \label{fig:first_mode_shape}
+\end{figure}
+
+
+\subsection{Unbalance response \label{sec:unbalance_response_ball_bearing}}
+The unbalance can be found an plotted in figure \ref{fig:unbalance_response}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\linewidth]{04/2/image.png}
+    \caption{Unbalance response of system (I), (II) and (III)}
+    \label{fig:unbalance_response}
+\end{figure}
+
+From figure \ref{fig:unbalance_response} it looks like the response is below the maximum. However, as there is no damping in the system,
+the response will increase to infinity at the critical speed. As such, the maximum displacement is a function of how many steps, or how precise this infinity can be calculated.
+Therefore it's not possible to determine wheter the response is below the maximum, as the maximum is always infinity even at very low unbalance.
+
 \section{Modelling of Hydrodynamic Bearing}
-cfbcv
+Instead of using ball bearings, the use of hydrodynamic bearings is considered. One of the ball bearings in system (III) is replaced with a two-axial-groove bearing.
+
 \subsection{Hydrodynamic bearing - Properties}
-cvbf
+First the properties of the specific hydrodynamic bearing is found.
+
 \subsubsection{Assumptions}
-xcbf
+The fluid inside the hydrodynamic bearing is assumed to be incompressible and the flow is assumed to be laminar. The bearing is assumed to be perfectly balanced.
+
+
 \subsubsection{External static load}
-dfgv
+To calculate the external static load a free body diagram is made. The free body diagram is shown in figure \ref{fig:free_body_diagram}.
+\begin{figure}[htbp]
+    \centering
+    \input{05/1/5.1.2.tex}
+    \caption{Free body diagram of hydrodynamic bearing}
+    \label{fig:free_body_diagram}
+\end{figure}
+
+With the geometry given the length can be found in table \ref{tab:hydrodynamic_bearing_properties}.
+\begin{table}[htbp]
+    \centering
+    \caption{Properties of Hydrodynamic Bearing}
+    \label{tab:hydrodynamic_bearing_properties}
+    \begin{tabular}{@{}ccccc@{}}
+        \toprule
+        $L_{D1}$    &   $L_{D2}$    &   $L_S$   &   $L_{R1}$   &   $L_{R2}$   \\ \midrule
+        \SI{0.123}{\meter}  &   \SI{0.182}{\meter}  &   \SI{0.575}{\meter}   &   \SI{0.355}{\meter}   &   \SI{1.095}{\meter}   \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+The forces are found form the greavitational force and there respective weight. The forces are shown in table \ref{tab:hydrodynamic_bearing_forces}.
+\begin{table}[htbp]
+    \centering
+    \caption{Forces in Hydrodynamic Bearing}
+    \label{tab:hydrodynamic_bearing_forces}
+    \begin{tabular}{@{}ccc@{}}
+        \toprule
+        $F_{D1}$    &   $F_{D2}$    &   $F_S$   \\ \midrule
+        \SI{347.6}{\newton}  &   \SI{445.0}{\newton}  &   \SI{206.2}{\newton}   \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+Force equilibirum can then be used to find the reaction forces:
+\begin{equation}
+    R_1 + R_2 - F_{D1} - F_{D2} - F_S = 0
+    \label{eq:vertical_equilibrium}
+\end{equation}
+\begin{equation}
+    -F_{D1} L_{D1} - F_{D2} L_{D2} - F_S L_S + R_1 L_{R1} + R_2 L_{R2} = 0
+    \label{eq:moment_equilibrium}
+\end{equation}
+Solving equation \ref{eq:vertical_equilibrium} and \ref{eq:moment_equilibrium} for $R_1$ and $R_2$ gives the reaction forces shown in table \ref{tab:hydrodynamic_bearing_reactions}.
+\begin{table}[htbp]
+    \centering
+    \caption{Reaction Forces in Hydrodynamic Bearing}
+    \label{tab:hydrodynamic_bearing_reactions}
+    \begin{tabular}{@{}cc@{}}
+        \toprule
+        $R_1$    &   $R_2$    \\ \midrule
+        \SI{1150.7}{\newton}  &   \SI{-151.9}{\newton}  \\ \bottomrule
+    \end{tabular}
+\end{table}
+
 \subsubsection{Oil film thickness}
-gdrt
+The oil fim thickness can be found and shown in figure \ref{fig:oil_film_thickness}.
+\begin{figure}[htbp]
+    \centering
+    \input{05/1/5.1.3.tex}
+    \caption{Oil film thickness in Hydrodynamic Bearing}
+    \label{fig:oil_film_thickness}
+\end{figure}
+
 \subsubsection{Stiffnes and damping}
-cvncn
+The stiffness and damping of the hydrodynamic bearing is found. The stiffness compared to the angular velocity is shown in figure \ref{fig:hydrodynamic_bearing_stiffness}.
+\begin{figure}[htbp]
+    \centering
+    \input{05/1/5.1.4K.tex}
+    \caption{Stiffness of Hydrodynamic Bearing}
+    \label{fig:hydrodynamic_bearing_stiffness}
+\end{figure}
+The damping compared to the angular velocity is shown in figure \ref{fig:hydrodynamic_bearing_damping}.
+\begin{figure}[htbp]
+    \centering
+    \input{05/1/5.1.4B.tex}
+    \caption{Damping of Hydrodynamic Bearing}
+    \label{fig:hydrodynamic_bearing_damping}
+\end{figure}
+
 \subsection{Prediction of Critical Speed}
-dfg
+To predict the two first critical speeds a campbell diagram is used.
+
 \subsubsection{First two critical speeds}
-hjkh
+The campbell diagram is shown in figure \ref{fig:hydrodynamic_bearing_campbell}.
+\begin{figure}[htbp]
+    \centering
+    \input{05/2/5.2.1.tex}
+    \caption{Campbell diagram of Hydrodynamic Bearing}
+    \label{fig:hydrodynamic_bearing_campbell}
+\end{figure}
+
+
 \subsubsection{Operational range}
-fgj
+The operation range can be determined from figure \ref{fig:hydrodynamic_bearing_campbell} to be xxxxxxxxxxx
+
 \subsection{Rotor Bearing Stability Limit}
-sdg
+instability occurs when the real part of the eigenvalues are positive. 
+
 \subsubsection{Maximum angular velocity}
-sdf
+To check for instability, the real parts of the eigenvalues are plotted in figure \ref{fig:hydrodynamic_bearing_eigenvalues}.
+\begin{figure}[htbp]
+    \centering
+    \input{05/3/5.3.1.tex}
+    \caption{Real parts of eigenvalues of Hydrodynamic Bearing}
+    \label{fig:hydrodynamic_bearing_eigenvalues}
+\end{figure}
+
 \subsubsection{Frequency of unstable vibration}
-sdf
+57.8704
+
 \subsubsection{Ratio between unstable Frequency and angular velocity}
-ælkdsf
+0.6156
+
 \subsection{Unbalance response}
-sdf
+Unlike with a ball bearing (see section \ref{sec:unbalance_response_ball_bearing}), the unbalance response of a hydrodynamic bearing is not infinite at the critical speed.
+As there is damping in the system, the response will not increase to infinity at the critical speed. The maximum displacement can be found and is shown in figure \ref{fig:hydrodynamic_bearing_unbalance_response}.
+\begin{figure}[htbp]
+    \centering
+    \input{05/4/5.4.tex}
+    \caption{Unbalance response of Hydrodynamic Bearing}
+    \label{fig:hydrodynamic_bearing_unbalance_response}
+\end{figure}
+
+From figure \ref{fig:hydrodynamic_bearing_unbalance_response} it can be seen that the response is below the maximum allowed displacement with a unbalance of \SI{1000}{\gram \milli \meter}.
+
 \subsection{Engeineering application}
-sdf
+It's possible to extend the maximum angular velocity of the system by changing the charictaristics of the hydrodynamic bearing.
+
 \subsubsection{Extend maximum angular velocity}
-ælkaæslkæalskd
+One could be to change the oil type used. Changing it to ISO-10 yields the stability map seen in figure \ref{fig:hydrodynamic_bearing_stability_map}.
+\begin{figure}[htbp]
+    \centering
+    \input{05/5/5.5.tex}
+    \caption{Stability map of Hydrodynamic Bearing}
+    \label{fig:hydrodynamic_bearing_stability_map}
+\end{figure}
+
 \subsubsection{Procentile improvement}
-ælaksældk
+The Procentile improvement can be seen in table xxxxx

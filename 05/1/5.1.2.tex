@@ -1,0 +1,19 @@
+\begin{tikzpicture}[scale=\textwidth/1cm]
+
+    \draw[fill=gray!10] (0,0) -- (1,0) -- (1,0.01) -- (0,0.01) -- cycle;    % shaft
+
+    \draw[force] (0.3, -0.05)node[below]{$F_{R1}$} -- (0.3, 0);    % reaction force
+    \draw[force] (0.9, -0.05)node[below]{$F_{R2}$} -- (0.9, 0);    % reaction force
+
+    \draw[force] (0.5, 0.06)node[above]{$F_{S}$} -- (0.5, 0.01);    % Shaft gravity force
+    \draw[force] (0.05, 0.06)node[above]{$F_{D1}$} -- (0.05, 0.01);    % Disk 1 gravity force
+    \draw[force] (0.15, 0.06)node[above]{$F_{D2}$} -- (0.15, 0.01);    % Disk 2 gravity force
+
+    \draw[dim] (0, 0.11) -- (0.05, 0.11)node[midway, above]{$L_{D1}$};    % Disk 1 length
+    \draw[dim] (0, 0.11) -- (0.15, 0.11)node[midway, above]{$L_{D2}$};    % Disk 2 length
+    \draw[dim] (0, 0.11) -- (0.5, 0.11)node[midway, above]{$L_S$};    % Shaft length
+
+    \draw[dim] (0, -0.1) -- (0.3, -0.1)node[midway, below]{$L_{R1}$};    % Reaction 1 length
+    \draw[dim] (0, -0.1) -- (0.9, -0.1)node[midway, below]{$L_{R2}$};    % Reaction 2 length
+
+\end{tikzpicture}
