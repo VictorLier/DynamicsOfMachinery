@@ -18,8 +18,6 @@ The shaft and both discs is made in ST60 steel with mechanical properties shown 
     \end{tabular}
 \end{table}
 
-
-
 \section{Lateral Dynamics of Flexible Shaft}
 The first step is creating a model of the shaft. The model is compared to a experimental result and adjusted accordingly.
 
@@ -157,7 +155,6 @@ The resulting natural frequencies are shown in table \ref{tab:natural_freq}.
 The experimental results from \cite[6]{Problem} is compared to the mathematical model. The experimantal natural frequencies and the discrepancy between the 3 mathematical models and the experimental results is shown in table \ref{tab:validation}.
 
 \begin{table}[htbp]
-    \begin{adjustwidth}{-2cm}{-2cm}
     \centering
     \caption{Validation of Mathematical Model}
     \label{tab:validation}
@@ -169,7 +166,6 @@ The experimental results from \cite[6]{Problem} is compared to the mathematical 
         3       &   1689    &   5.2  &   -5.8  &   4.6  \\
         4       &   2624    &   0.8  &   -39.5  &   2.8  \\ \bottomrule
     \end{tabular}
-    \end{adjustwidth}
 \end{table}
 
 
@@ -177,32 +173,30 @@ The experimental results from \cite[6]{Problem} is compared to the mathematical 
 As the very fine model is within \SI{5}{\percent} of the experimental results, this model is deemed accurate enough for further analysis. This model is choosen for further analysis and is refered to as system (I)
 
 \section{Lateral Dynamics of Flexible Shaft and Discs}
-The next step is to add the discs to the shaft. The same procedure as before is done. First the \SI{80}{\milli \meter} disc is added and then the \SI{100}{\milli \meter} disc is added.
+The next step is to add the discs to the shaft. Both a disc with a width of \SI{80}{\milli \meter} and a disc with a width of \SI{100}{\milli \meter} is implemeted.
 
 \subsection{Modelling}
-As before the discs are drawn in solidworks to calculate the mass and moment of inertia. The resuting geometry is perfectly balanced with the mass and moment of inertia shown in table \ref{tab:disc_mass_moment}.
+To implement the disc in the system a mechanical and mathematical model is created.
 
 \subsubsection{Mechanical model}
+The discs are assumed to be rigid bodies thats mounted to the shaft at a point. And with a assumtion of axisymmetry the discs can be modelled as a point mass at the mounting point. Therefore only the mass and the moment of inertia in two directions is needed. To calculate these the discs are drawn in CAD and the mass and moment of inertia is calculated. The mass and moment of inertia of the discs is shown in table \ref{tab:disc_mass_moment}.
 \begin{table}[htbp]
     \centering
     \caption{Mass and Moment of Inertia of Discs}
     \label{tab:disc_mass_moment}
-    \begin{tabular}{@{}ccc@{}}
+    \begin{tabular}{@{}cccc@{}}
         \toprule
-        Disc diamter    &   Mass                    &   Moment of Inertia                       \\ \midrule
-        \SI{80}{\milli \meter}\SI{0.5}{\kilo \gram}   &   \SI{0.0001}{\kilo \gram \square \meter} \\ 
-        \SI{100}{\milli \meter} &   \SI{0.4}{\kilo \gram}   &   \SI{0.001}{\kilo \gram \square \meter}\\ \bottomrule
+        Width    &   Mass                    &   $Id$   &   $Ip$                       \\ \midrule
+        \SI{80}{\milli \meter} &  \SI{35.89}{\kilo \gram}   &   \SI{0.221}{\kilo \gram \square \meter} & \SI{0.403}{\kilo \gram \square \meter} \\ 
+        \SI{100}{\milli \meter} &   \SI{45.96}{\kilo \gram}   &   \SI{0.297}{\kilo \gram \square \meter} & \SI{0.518}{\kilo \gram \square \meter}\\ \bottomrule
     \end{tabular}
 \end{table}
 
-The discs are assumed to be perfectly balanced. The internal details of the discs are neglected.
-The model is assumed rigid with only rigid body motion. 
+As the CAD model is nearly a perfect reproduction of the disc, only few simplifications are made. Only small details like the chamfers and raoundings are neglected.
 
 \subsubsection{Mathematical model - one disc}
-The mass and moment of inertia of the \SI{100}{\milli \meter} disc is added to the mathematical model of the shaft, in the node corresponding to the placement seen in \cite[Appendix]{Problem}.
-As the disc is assumed to be rigid the extra stifness of the disc is not added.
-
-The natural frequencies of the system is calculated and shown in table \ref{tab:natural_freq_one_disc}.
+The mass and moment of inertia of the \SI{100}{\milli \meter} disc is added to the mathematical model of the shaft, in the closest node corresponding to the placement seen in figure \ref{fig:shaft_geometry}.
+As the disc is assumed to be rigid the extra stifness of the disc is not added. The natural frequencies of the system is calculated, as before, and shown in table \ref{tab:natural_freq_one_disc}.
 \begin{table}[htbp]
     \centering
     \caption{Undamped Natural Frequencies of Shaft and One Disc}
@@ -217,15 +211,11 @@ The natural frequencies of the system is calculated and shown in table \ref{tab:
         5       &   2.283.5 \\ \bottomrule
     \end{tabular}
 \end{table}
-
-
 This model is refered to as system (II)
 
-\subsubsectionmark{Mathematical model - two discs}
-The mass and moment of inertia of the \SI{100}{\milli \meter} disc is added to the mathematical system (II) in the node corresponding to the placement seen in \cite[Appendix]{Problem}.
-The disc is assumed to be rigid and the extra stifness of the disc is not added.
-
-The natural frequencies of the system is calculated and shown in table \ref{tab:natural_freq_two_discs}.
+\subsubsection{Mathematical model - two discs}
+The mass and moment of inertia of the \SI{100}{\milli \meter} disc is added to the mathematical system (II) in the node corresponding to the placement seen in figure \ref{fig:shaft_geometry}.
+The disc is assumed to be rigid and the extra stifness of the disc is not added. The natural frequencies of the system is calculated and shown in table \ref{tab:natural_freq_two_discs}.
 \begin{table}[htbp]
     \centering
     \caption{Undamped Natural Frequencies of Shaft and Two Discs}
@@ -240,7 +230,6 @@ The natural frequencies of the system is calculated and shown in table \ref{tab:
         5       &   2276.9 \\ \bottomrule
     \end{tabular}
 \end{table}
-
 This model is refered to as system (III)
 
 \subsection{Validation}
@@ -262,13 +251,14 @@ With the natural frequencies of the systems (II) and (III) the experimental resu
     \end{adjustwidth}
 \end{table}
 
-A major discrepancy is seen in the third mode of system (III). This is due to an interaction between the two discs. The model is adjusted to account for this.
+A major discrepancy is seen in the third mode of system (III). This is due to an interaction between the two discs. As the discs is assumed as point masses, this model can not account for this.
 
 \subsection{Model adjustment}
 As only one natural frequency is significantly off, both models is deemed accurate enough for further analysis.
 
 \section{Modelling of Ball Bearing}
-When including the ball bearings at the specified points on the shaft, system (I) is considered with the ball bearing stifness going from \SIrange{e1}{10e9}{\pascal}.
+Including the ball bearings in the locations seen on figure \ref{fig:shaft_geometry} the system (I) is considered with the ball bearing stiffness going from \SIrange{e1}{10e9}{\pascal}.
+To include the ball bearings in the mathematical system the stiffness matrix is updated with the ball bearing stiffness in the nodes where the bearings are mounted. The ball bearings are assumes to not have any damping.
 The 8 first natural frequencies compared with the stifnees can be seen on figure \ref{fig:ball_bearing_stiffness}.
 \begin{figure}[htbp]
     \centering
@@ -277,8 +267,9 @@ The 8 first natural frequencies compared with the stifnees can be seen on figure
     \label{fig:ball_bearing_stiffness}
 \end{figure}
 
-As expected, the lowest eigenfrequencies, at the lowest stiffness, can be considered rigid body movements with a very low natural frequency.
-With increasing stiffness the natural frequencies turns into the expected natural frequencies seen in xxxxxxxxxxxx -------- xxxxxxxxxxx indæst billeder.
+As expected, the lowest eigenfrequencies, at the lowest stiffness, can be considered rigid body movements with a very low natural frequency. With increasing stiffness the lowest natural frequencies rises to the same level as the other natural frequencies.
+
+--------------------- Shapes --------------xxxxxxxxxx
 
 \subsection{Prediction of critical speeds}
 Another important aspect of the shaft system is the critical speeds. The critical speed is the speed at which the exitaction frequency is the same as the natural frequency.
@@ -291,42 +282,51 @@ The campbell diagram of system (I), (II) and (III) is shown in figure \ref{fig:c
     \caption{Campbell diagram of system (I), (II) and (III)}
     \label{fig:campbell_diagram}
 \end{figure}
+The natural frequencies, in a campbell diagram, is split up in two lines as the angulare velocity is increased. This is a result of the gyroscopic effect. The upper line is the forward line and the lower line is the backward line. However, as there is no unbalance in the system, only the upper (forward) line is of interrest. From figure \ref{fig:campbell_diagram} it can be seen that the first critical speed of system (I) is $\approx \SI{260}{\hertz}$, system (II) is $\approx \SI{175}{\hertz}$ and system (III) is $\approx \SI{145}{\hertz}$.
 
-Only the upper line - Forward
-
+The natural frequency at $\Omega = 0$ is lower for the heavier system (II) and (III). With system (III) having the lowest natural frequency. When increasing the angular velocity, the system (I) with the lowest moment of inertia, have an almost constant natural frequency. While the two other systems have a natural frequency that increases with the angular velocity. This is especially prevellent for the first natural frequency.
 
 \subsubsection{First mode shapes}
-The first mode shape of system (I), (II) and (III) is shown in figure \ref{fig:first_mode_shape}.
+The first mode shape of system (I), (II) and (III) is shown in figure \ref{fig:first_mode_shape}. The mode shape is normalized to 1 between the two bearings.
 \begin{figure}[htbp]
     \centering
     \input{04/1/OPG4.1B.tex}
     \caption{First mode shape of system (I), (II) and (III)}
     \label{fig:first_mode_shape}
 \end{figure}
-
+The modeshape of all three systems is the same. It's clear the the displacement is larger with more mass at the discs. With a large jump in displacement when adding a single disc and a smaller jump when adding the second disc.
 
 \subsection{Unbalance response \label{sec:unbalance_response_ball_bearing}}
-The unbalance can be found an plotted in figure \ref{fig:unbalance_response}.
+A small unbalance is added to the \SI{100}{\milli \meter} disc and the unbalance response can be found an plotted in figure \ref{fig:unbalance_response}.
 \begin{figure}[htbp]
+\begin{subfigure}[t]{0.49\textwidth}
     \centering
-    \includegraphics[width=0.8\linewidth]{04/2/image.png}
-    \caption{Unbalance response of system (I), (II) and (III)}
-    \label{fig:unbalance_response}
+    \input{04/2/4.2A.tex}
+    \caption{}
+    \label{fig:unbalance_response_natural}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.49\textwidth}
+    \centering
+    \input{04/2/4.2B.tex}
+    \caption{}
+    \label{fig:unbalance_response_disp}
+\end{subfigure}
+\caption{Unbalance response of system (III), (\subref{fig:unbalance_response_natural}) shows the natural frequencies and (\subref{fig:unbalance_response_disp}) shows the displacement}
+\label{fig:unbalance_response}
 \end{figure}
-
 From figure \ref{fig:unbalance_response} it looks like the response is below the maximum. However, as there is no damping in the system,
 the response will increase to infinity at the critical speed. As such, the maximum displacement is a function of how many steps, or how precise this infinity can be calculated.
 Therefore it's not possible to determine wheter the response is below the maximum, as the maximum is always infinity even at very low unbalance.
 
 \section{Modelling of Hydrodynamic Bearing}
-Instead of using ball bearings, the use of hydrodynamic bearings is considered. One of the ball bearings in system (III) is replaced with a two-axial-groove bearing.
+Instead of using ball bearings, the use of hydrodynamic bearings is considered. The ball bearing positioned at \textcolor{red}{B1} in figure \ref{fig:shaft_geometry} is replaced with a two-axial-groove bearing for system  system (III)
 
 \subsection{Hydrodynamic bearing - Properties}
 First the properties of the specific hydrodynamic bearing is found.
 
 \subsubsection{Assumptions}
 The fluid inside the hydrodynamic bearing is assumed to be incompressible and the flow is assumed to be laminar. The bearing is assumed to be perfectly balanced.
-
 
 \subsubsection{External static load}
 To calculate the external static load a free body diagram is made. The free body diagram is shown in figure \ref{fig:free_body_diagram}.
@@ -336,7 +336,6 @@ To calculate the external static load a free body diagram is made. The free body
     \caption{Free body diagram of hydrodynamic bearing}
     \label{fig:free_body_diagram}
 \end{figure}
-
 With the geometry given the length can be found in table \ref{tab:hydrodynamic_bearing_properties}.
 \begin{table}[htbp]
     \centering
@@ -348,7 +347,6 @@ With the geometry given the length can be found in table \ref{tab:hydrodynamic_b
         \SI{0.123}{\meter}  &   \SI{0.182}{\meter}  &   \SI{0.575}{\meter}   &   \SI{0.355}{\meter}   &   \SI{1.095}{\meter}   \\ \bottomrule
     \end{tabular}
 \end{table}
-
 The forces are found form the greavitational force and there respective weight. The forces are shown in table \ref{tab:hydrodynamic_bearing_forces}.
 \begin{table}[htbp]
     \centering
@@ -360,7 +358,6 @@ The forces are found form the greavitational force and there respective weight. 
         \SI{347.6}{\newton}  &   \SI{445.0}{\newton}  &   \SI{206.2}{\newton}   \\ \bottomrule
     \end{tabular}
 \end{table}
-
 Force equilibirum can then be used to find the reaction forces:
 \begin{equation}
     R_1 + R_2 - F_{D1} - F_{D2} - F_S = 0
@@ -377,38 +374,41 @@ Solving equation \ref{eq:vertical_equilibrium} and \ref{eq:moment_equilibrium} f
     \label{tab:hydrodynamic_bearing_reactions}
     \begin{tabular}{@{}cc@{}}
         \toprule
-        $R_1$    &   $R_2$    \\ \midrule
+        $F_{R1}$    &   $F_{R2}$    \\ \midrule
         \SI{1150.7}{\newton}  &   \SI{-151.9}{\newton}  \\ \bottomrule
     \end{tabular}
 \end{table}
+Thus the force on the hydrodynamic bearing is \SI{1150.7}{\newton}.
 
 \subsubsection{Oil film thickness}
-The oil fim thickness can be found and shown in figure \ref{fig:oil_film_thickness}.
+The oil thickness is calculated with the bearing dimensions, the force on the bearing and the table data from \cite[Table 1a]{Problem}. The oil flim thickness is shown in figure \ref{fig:oil_film_thickness}.
 \begin{figure}[htbp]
     \centering
     \input{05/1/5.1.3.tex}
     \caption{Oil film thickness in Hydrodynamic Bearing}
     \label{fig:oil_film_thickness}
 \end{figure}
+It's clear that the oil film thickness is increasing with the angular velocity. Especially at low angular velocities the oil film thickness increases quite rapidly with the angular velocity.
 
 \subsubsection{Stiffnes and damping}
-The stiffness and damping of the hydrodynamic bearing is found. The stiffness compared to the angular velocity is shown in figure \ref{fig:hydrodynamic_bearing_stiffness}.
+The stiffness and damping of the hydrodynamic bearing is calculated from the bearing dimensions and the table data from \cite[Table 1a]{Problem}. The stiffness compared to the angular velocity is shown in figure \ref{fig:hydrodynamic_bearing_stiffness}.
 \begin{figure}[htbp]
     \centering
     \input{05/1/5.1.4K.tex}
     \caption{Stiffness of Hydrodynamic Bearing}
     \label{fig:hydrodynamic_bearing_stiffness}
 \end{figure}
-The damping compared to the angular velocity is shown in figure \ref{fig:hydrodynamic_bearing_damping}.
+Also the damping can be found. The damping compared to the angular velocity is shown in figure \ref{fig:hydrodynamic_bearing_damping}.
 \begin{figure}[htbp]
     \centering
     \input{05/1/5.1.4B.tex}
     \caption{Damping of Hydrodynamic Bearing}
     \label{fig:hydrodynamic_bearing_damping}
 \end{figure}
+Except for very low angular velocities the damping is almost constant in the entire range. The stiffness of the bearing is however very much dependet on the angular velocity. Only the Kxx is approximatly constant in the entire range. The stifness in the y-direction is increasing with the angular velocity although the increase is not as rapid after around \SI{200}{\hertz}. The coupling stifnesses, kxy and kxy increases and decreases respectily approximatly linearly with the angular velocity.
 
 \subsection{Prediction of Critical Speed}
-To predict the two first critical speeds a campbell diagram is used.
+To predict the two first critical speeds the damped natural frequencies is shown in a campbell diagram.
 
 \subsubsection{First two critical speeds}
 The campbell diagram is shown in figure \ref{fig:hydrodynamic_bearing_campbell}.
@@ -421,49 +421,43 @@ The campbell diagram is shown in figure \ref{fig:hydrodynamic_bearing_campbell}.
 
 
 \subsubsection{Operational range}
-The operation range can be determined from figure \ref{fig:hydrodynamic_bearing_campbell} to be xxxxxxxxxxx
+The operation range can be determined from figure \ref{fig:hydrodynamic_bearing_campbell} to be approximatly 7500 rpm.
 
 \subsection{Rotor Bearing Stability Limit}
-instability occurs when the real part of the eigenvalues are positive. 
+Instability occurs when the real part of the eigenvalues are positive.
 
 \subsubsection{Maximum angular velocity}
-To check for instability, the real parts of the eigenvalues are plotted in figure \ref{fig:hydrodynamic_bearing_eigenvalues}.
+To check for instability, the real parts of the eigenvalues are compared to the angular velocity in figure \ref{fig:hydrodynamic_bearing_eigenvalues}.
 \begin{figure}[htbp]
     \centering
     \input{05/3/5.3.1.tex}
     \caption{Real parts of eigenvalues of Hydrodynamic Bearing}
     \label{fig:hydrodynamic_bearing_eigenvalues}
 \end{figure}
+Around 5500 rpm the real part of one of the eigenvalues becomes positive. This is the maximum stable angular velocity of the system.
 
 \subsubsection{Frequency of unstable vibration}
-57.8704
-
-\subsubsection{Ratio between unstable Frequency and angular velocity}
-0.6156
+The frequency of the unstable vibration is found to be \SI{57.8704}{\hertz}. Compared to the angular velocity this gives a ratio of 0.6156. Very close to the expected 0.5.
 
 \subsection{Unbalance response}
-Unlike with a ball bearing (see section \ref{sec:unbalance_response_ball_bearing}), the unbalance response of a hydrodynamic bearing is not infinite at the critical speed.
-As there is damping in the system, the response will not increase to infinity at the critical speed. The maximum displacement can be found and is shown in figure \ref{fig:hydrodynamic_bearing_unbalance_response}.
+Unlike with a ball bearing (see section \ref{sec:unbalance_response_ball_bearing}), the unbalance response of a hydrodynamic bearing is not infinite at the critical speed. As there is damping in the system, the response will not increase to infinity at the critical speed. The maximum displacement can be found and is shown in figure \ref{fig:hydrodynamic_bearing_unbalance_response} for a unbalance of \SI{1100}{\gram \milli \meter}.
 \begin{figure}[htbp]
     \centering
     \input{05/4/5.4.tex}
     \caption{Unbalance response of Hydrodynamic Bearing}
     \label{fig:hydrodynamic_bearing_unbalance_response}
 \end{figure}
-
-From figure \ref{fig:hydrodynamic_bearing_unbalance_response} it can be seen that the response is below the maximum allowed displacement with a unbalance of \SI{1000}{\gram \milli \meter}.
+It can be seen that the maximum response is below the maximum allowed displacement. Thus a unbalance of \SI{1100}{\gram \milli \meter} is acceptable. Notably is that the maximum displacement is at the small disc, not the disc with a unbalance as the smaller disc is mounted further out on the shaft and thus have a larger displacement.
 
 \subsection{Engeineering application}
 It's possible to extend the maximum angular velocity of the system by changing the charictaristics of the hydrodynamic bearing.
 
 \subsubsection{Extend maximum angular velocity}
-One could be to change the oil type used. Changing it to ISO-10 yields the stability map seen in figure \ref{fig:hydrodynamic_bearing_stability_map}.
+One change could be the oil type used. Changing it to ISO-10 with a lower viscosity yields the stability map seen in figure \ref{fig:hydrodynamic_bearing_stability_map}.
 \begin{figure}[htbp]
     \centering
     \input{05/5/5.5.tex}
     \caption{Stability map of Hydrodynamic Bearing}
     \label{fig:hydrodynamic_bearing_stability_map}
 \end{figure}
-
-\subsubsection{Procentile improvement}
-The Procentile improvement can be seen in table xxxxx
+Where the maximum angular velocity is now approximatly 6000 rpm. This is a increase from 5500 rpm of approximatly 9\%.

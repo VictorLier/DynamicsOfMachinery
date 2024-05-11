@@ -1,19 +1,50 @@
-\begin{tikzpicture}[scale=\textwidth/1cm]
+%\begin{tikzpicture}[scale=\textwidth/1cm]
+%
+%    \draw[fill=gray!10] (0,0) -- (1,0) -- (1,0.01) -- (0,0.01) -- cycle;    % shaft
+%
+%    \draw[force] (0.3, -0.05)node[below]{$F_{R1}$} -- (0.3, 0);    % reaction force
+%    \draw[force] (0.9, -0.05)node[below]{$F_{R2}$} -- (0.9, 0);    % reaction force
+%
+%    \draw[force] (0.5, 0.06)node[above]{$F_{S}$} -- (0.5, 0.01);    % Shaft gravity force
+%    \draw[force] (0.05, 0.06)node[above]{$F_{D1}$} -- (0.05, 0.01);    % Disk 1 gravity force
+%    \draw[force] (0.15, 0.06)node[above]{$F_{D2}$} -- (0.15, 0.01);    % Disk 2 gravity force
+%
+%    \draw[dim] (0, 0.11) -- (0.05, 0.11)node[midway, above]{$L_{D1}$};    % Disk 1 length
+%    \draw[dim] (0, 0.11) -- (0.15, 0.11)node[midway, above]{$L_{D2}$};    % Disk 2 length
+%    \draw[dim] (0, 0.11) -- (0.5, 0.11)node[midway, above]{$L_S$};    % Shaft length
+%
+%    \draw[dim] (0, -0.1) -- (0.3, -0.1)node[midway, below]{$L_{R1}$};    % Reaction 1 length
+%    \draw[dim] (0, -0.1) -- (0.9, -0.1)node[midway, below]{$L_{R2}$};    % Reaction 2 length
+%
+%\end{tikzpicture}
 
-    \draw[fill=gray!10] (0,0) -- (1,0) -- (1,0.01) -- (0,0.01) -- cycle;    % shaft
+\begin{tikzpicture}[scale=\linewidth/120cm]
 
-    \draw[force] (0.3, -0.05)node[below]{$F_{R1}$} -- (0.3, 0);    % reaction force
-    \draw[force] (0.9, -0.05)node[below]{$F_{R2}$} -- (0.9, 0);    % reaction force
+    % Bearing mounts
+    %\draw[red, dashed] (109.75, -7) -- (109.75, 7) node[above] {B1};
+    %\draw[red, dashed] (35.5, -7) -- (35.5, 7) node[above] {B2};
 
-    \draw[force] (0.5, 0.06)node[above]{$F_{S}$} -- (0.5, 0.01);    % Shaft gravity force
-    \draw[force] (0.05, 0.06)node[above]{$F_{D1}$} -- (0.05, 0.01);    % Disk 1 gravity force
-    \draw[force] (0.15, 0.06)node[above]{$F_{D2}$} -- (0.15, 0.01);    % Disk 2 gravity force
+    \draw[force] (109.75, -7.8225)node[right]{$F_{R2}$} -- (109.75, -2.8225);    % reaction force
+    \draw[force] (35.5, -9.985)node[right]{$F_{R1}$} -- (35.5, -4.985);    % reaction force
 
-    \draw[dim] (0, 0.11) -- (0.05, 0.11)node[midway, above]{$L_{D1}$};    % Disk 1 length
-    \draw[dim] (0, 0.11) -- (0.15, 0.11)node[midway, above]{$L_{D2}$};    % Disk 2 length
-    \draw[dim] (0, 0.11) -- (0.5, 0.11)node[midway, above]{$L_S$};    % Shaft length
+    \draw[force] (57.5, 9.485)node[right]{$F_{S}$} -- (57.5, 4.485);    % Shaft gravity force
 
-    \draw[dim] (0, -0.1) -- (0.3, -0.1)node[midway, below]{$L_{R1}$};    % Reaction 1 length
-    \draw[dim] (0, -0.1) -- (0.9, -0.1)node[midway, below]{$L_{R2}$};    % Reaction 2 length
+    % Discs
+    %\draw[blue, dashed] (19, -7) -- (19, 7) node[above] {D100};
+    %\draw[blue, dashed] (10, -7) -- (10, 7) node[above] {D80};
+    
+    \draw[force] (12.3, 8.5)node[left]{$F_{D1}$} -- (12.3, 3.5);    % Disk 1 gravity force
+    \draw[force] (18.2, 8.5)node[right]{$F_{D2}$} -- (18.2, 3.5);    % Disk 2 gravity force
+
+    % shaft
+    \draw[fill=gray!10] (0,-2.975) -- (6.5,-2.975) -- (6.5,-3.5) -- (24.0, -3.5) -- (24.0, -4.485) -- (29.5, -4.485) -- (29.5, -4.985) -- (41.5, -4.985) -- (41.5, -4.485) -- (104.0, -4.485) -- (104.0, -2.8225) -- (115.0, -2.8225) -- (115.0, 2.8225) -- (104.0, 2.8225) -- (104.0, 4.485) -- (41.5, 4.485) -- (41.5, 4.985) -- (29.5, 4.985) -- (29.5, 4.485) -- (24.0, 4.485) -- (24.0, 3.5) -- (6.5, 3.5) -- (6.5, 2.975) -- (0, 2.975) -- cycle;
+
+    \draw[dim] (0, 15) -- (12.3, 15)node[midway, above]{$L_{D1}$};    % Disk 1 length
+    \draw[dim] (0, 15) -- (18.2, 15)node[above]{$L_{D2}$};    % Disk 2 length
+    \draw[dim] (0, 15) -- (57.5, 15)node[midway, above]{$L_S$};    % Shaft length
+
+    \draw[dim] (0, -15) -- (35.5, -15)node[midway, below]{$L_{R1}$};    % Reaction 1 length
+    \draw[dim] (0, -15) -- (109.5, -15)node[midway, below]{$L_{R2}$};    % Reaction 2 length
+
 
 \end{tikzpicture}
