@@ -1,0 +1,32 @@
+\begin{tikzpicture}[scale=\linewidth/120cm]
+
+    % Bearing mounts
+    \draw[red, dashed] (109.75, -7) -- (109.75, 7) node[above] {B1};
+    \draw[red, dashed] (35.5, -7) -- (35.5, 7) node[above] {B2};
+
+    % Discs
+    \draw[blue, dashed] (19, -7) -- (19, 7) node[above] {D100};
+    \draw[blue, dashed] (10, -7) -- (10, 7) node[above] {D80};
+    
+    % shaft
+    \draw[fill=gray!10] (0,-2.975) -- (6.5,-2.975) -- (6.5,-3.5) -- (24.0, -3.5) -- (24.0, -4.485) -- (29.5, -4.485) -- (29.5, -4.985) -- (41.5, -4.985) -- (41.5, -4.485) -- (104.0, -4.485) -- (104.0, -2.8225) -- (115.0, -2.8225) -- (115.0, 2.8225) -- (104.0, 2.8225) -- (104.0, 4.485) -- (41.5, 4.485) -- (41.5, 4.985) -- (29.5, 4.985) -- (29.5, 4.485) -- (24.0, 4.485) -- (24.0, 3.5) -- (6.5, 3.5) -- (6.5, 2.975) -- (0, 2.975) -- cycle;
+
+    % length
+    \draw[dim] (0, -8) -- (6.5, -8) node[midway, below] {$L_1$};
+    \draw[dim] (6.5, -8) -- (24, -8) node[midway, below] {$L_2$};
+    \draw[dim] (24, -8) -- (29.5, -8) node[midway, below] {$L_3$};
+    \draw[dim] (29.5, -8) -- (41.5, -8) node[midway, below] {$L_4$};
+    \draw[dim] (41.5, -8) -- (104, -8) node[midway, below] {$L_5$};
+    \draw[dim] (104, -8) -- (115, -8) node[midway, below] {$L_6$};
+
+
+    % diameter
+    \draw[dim] (3.25, -2.975) -- (3.25, 2.975) node[midway, right] {$D_1$};
+    \draw[dim] (15.75, -3.5) -- (15.75, 3.5) node[midway, right] {$D_2$};
+    \draw[dim] (26.75, -4.485) -- (26.75, 4.485) node[midway, right] {$D_3$};
+    \draw[dim] (35.5, -4.985) -- (35.5, 4.985) node[midway, right] {$D_4$};
+    \draw[dim] (72.75, -4.485) -- (72.75, 4.485) node[midway, right] {$D_5$};
+    \draw[dim] (109.75, -2.8225) -- (109.75, 2.8225) node[midway, left] {$D_6$};
+
+
+\end{tikzpicture}

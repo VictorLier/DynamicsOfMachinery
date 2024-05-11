@@ -11,12 +11,14 @@ The shaft and both discs is made in ST60 steel with mechanical properties shown 
     \centering
     \caption{Mechanical Properties of ST60 Steel}
     \label{tab:mech_prop}
-    \begin{tabular}{@{}cccc@{}}
+    \begin{tabular}{@{}cc@{}}
         \toprule
-        Density                                     &   Poisson Ratio   &   Elastic Modulus         &   Yield Strength \\ \midrule
-        \SI{7800}{\kilo \gram \per \cubic \meter} &   0.3             &   \SI{200}{\giga \pascal} &   \SI{390}{\mega \pascal}                               \\ \bottomrule
+        Density                                       &   Elastic Modulus         \\ \midrule
+        \SI{7800}{\kilo \gram \per \cubic \meter}             &   \SI{200}{\giga \pascal}  \\ \bottomrule
     \end{tabular}
 \end{table}
+
+
 
 \section{Lateral Dynamics of Flexible Shaft}
 The first step is creating a model of the shaft. The model is compared to a experimental result and adjusted accordingly.
@@ -25,29 +27,114 @@ The first step is creating a model of the shaft. The model is compared to a expe
 From the technical drawings in \cite[Appendix]{Problem} the shaft can be modelled and analyzed.
 
 \subsubsection{Mechanical model}
-The shaft is drawn in solidworks to calculate the mass and moment of inertia. When doing so some simplifications are done.
-The keyways at the ends of the shafts are neglected and the small fillets are not included. Other small features, namely the screw hole at the end and the two small flanges on the shaft is likewise neglected.
-The resulting geometry is perfectly balanced with the mass and moment of inertia shown in table \ref{tab:shaft_mass_moment}.
+The mechanical model have a simplified geometry compared to the technical drawings. The keyways at the ends of the shafts are neglected and the small fillets are not included. Other features like the screw holes, threads and the two small flanges on the shaft is likewise neglected.
+The smaller steps in diamter, mostly at the ends of the shaft, is simplified to a single diameter calculated to result in the same moment of inertia as the original geometry.
+The final geometry consist of 6 sections with varying diameter and length. The geometry is shown in figure \ref{fig:shaft_geometry}.
+\begin{figure}[htbp]
+    \centering
+    \input{02/1/shaft_geometry.tex}
+    \caption{Geometry of Shaft}
+    \label{fig:shaft_geometry}
+\end{figure}
+
+\textcolor{blue}{D80} and \textcolor{blue}{D100} indicates the mounting point of the discs. \textcolor{red}{B1} and \textcolor{red}{B2} indicates the mounting point of the bearings.
+The length and diameter of the shaft is shown in table \ref{tab:shaft_geometry}.
 \begin{table}[htbp]
     \centering
-    \caption{Mass and Moment of Inertia of Shaft}
-    \label{tab:shaft_mass_moment}
-    \begin{tabular}{@{}cc@{}}
+    \caption{Dimensions from figure \ref{fig:shaft_geometry}}
+    \label{tab:shaft_geometry}
+    \begin{tabular}{@{}ccccccc@{}}
         \toprule
-        Mass                    &   Moment of Inertia                       \\ \midrule
-        \SI{0.5}{\kilo \gram}   &   \SI{0.0001}{\kilo \gram \square \meter} \\ \bottomrule
+        $i$  &   1   &   2   &   3   &   4   &   5   &   6   \\ \midrule
+        $D_i$ [\si{\milli \meter}]  &   59.5  &   70  &   89.7  &   99.7  &   89.7  &   56.45  \\
+        $L_i$ [\si{\milli \meter}]  &   65 &   175    &   55 &   120  &   625  &   110    \\ \bottomrule
     \end{tabular}
 \end{table}
 
-Other assumptions:
+Besides the geometric simplifications other assumptions are also made:
+\begin{itemize}
+    \item The shaft is assumed to be perfectly balanced.
+    \item The shaft is assumed to be made of a homogenous material.
+    \item The shaft is assumed axisymmetric.
+    \item Each shaft element is assumed to bend with a 2nd order polynomial ie. 4 degrees of freedom at each node.
+    \item The shaft bending is assumed linear and can be modelled with simple beam theory.
+    \item The required bending force can be modelled as a perfect spring, ie. no loss of energy (no damping).
+\end{itemize}
 
 \subsubsection{Mathematical model}
-3 mathematical models are discretized from the mechanical model with increasing number of elements. The coarse model is seen a as a shaft with constant diameter of \SI{90}{\milli \meter} and length of \SI{1150}{\milli \meter}. The coarse model is discretized into 18 equal length elements.
-The fine model have more complex geometry. Here the shaft is broken up into 6 section with varying diameter and length, each with one element. This includes more of the intrecasiess of the orginal geometry.
-The Very fine model have the same 6 sections as the fine model, but discretizes the sections with more elements. The very fine mesh consist of 17 elements in total.
+3 mathematical models are discretized from the mechanical model with increasing number of elements. The coarse model (seen in figure \ref{fig:coarse_model}) is seen a as a shaft with constant diameter of \SI{90}{\milli \meter} and length of \SI{1150}{\milli \meter}. The coarse model is discretized into 18 equal length elements.
+\begin{figure}[htbp]
+    \centering
+    \input{02/1/coarse_model.tex}
+    \caption{Coarse Model}
+    \label{fig:coarse_model}
+\end{figure}
+
+The fine model (figure \ref{fig:fine_model}) have more complex geometry. Here the shaft is broken up into 6 section with varying diameter and length, each with one element. This includes more of the intrecasiess of the orginal geometry. The diamters are round giving a slightly different diamter at the ends.
+\begin{figure}[htbp]
+    \centering
+    \input{02/1/fine_model.tex}
+    \caption{Fine Model}
+    \label{fig:fine_model}
+\end{figure}
+
+The very fine model (figure \ref{fig:very_fine_model}) have the same 6 sections as the mechanical geometry (figure \ref{fig:shaft_geometry}) discretizes into approximatly equally sized elements. The very fine mesh consist of 19 elements in total.
+\begin{figure}[htbp]
+    \centering
+    \input{02/1/very_fine_model.tex}
+    \caption{Very Fine Model}
+    \label{fig:very_fine_model}
+\end{figure}
+
+For each of the discretized models, the mathematical model is created the same way:
+
+The goverining equation for the system can be written as:
+\begin{equation}
+    M \ddot{q} - \Omega G \dot{q} + K q = Q
+\end{equation}
+Where $M$ is the mass matrix, $G$ is the gyroscopic matrix, $\Omega$ is the rotational speed, $K$ is the stiffness matrix, $q$ is the displacement vector and $Q$ is the force vector. The mass matrix for each element can be found by taking the linear motion into account ( $\mathbf{M_t^e}$) and the angular motion ($\mathbf{M_R^e}$):
+
+\begin{equation}
+    \mathbf{M^e} = \mathbf{M_t^e} + \mathbf{M_R^e} 
+\end{equation}
+
+For each element this matrices can be found:
+\begin{equation}
+    \mathbf{M_t^e} = \int_{0}^{l} \mu \Psi^T \Psi ds
+    \label{eq:mass_matrix_linear}
+\end{equation}
+\begin{equation}
+    \mathbf{M_R^e} = \int_{0}^{l} I_d \Theta^T \Theta ds
+    \label{eq:mass_matrix_angular}
+\end{equation}
+\begin{equation}
+    \mathbf{K_B^e} = \int_{0}^{l} E I \Psi''^T \Psi'' ds
+\end{equation}
+Where:
+\begin{equation}
+    \Psi(s) =
+    \begin{bmatrix}
+        \psi_1(s) & 0 & 0 & \psi_2(s) & \psi_3(s) & 0 & 0 & \psi_4(s) \\
+        0 & \psi_1(s) & -\psi_2(s) & 0 & 0 & \psi_3(s) & -\psi_4(s) & 0
+    \end{bmatrix}
+    \label{eq:psi}
+\end{equation}
+\begin{equation}
+    \Theta(s) = 
+    \begin{bmatrix}
+        0 & -\theta_1(s) & \theta_2(s) & 0 & 0 & -\theta_3(s) & \theta_4(s) & 0 \\
+        \theta_1(s) & 0 & 0 & \theta_2(s) & \theta_3(s) & 0 & 0 & \theta_4(s)
+    \end{bmatrix}
+    \label{eq:theta}
+\end{equation}
+Equation \ref{eq:psi} and \ref{eq:theta} are the shape functions for the linear and angular motion.
+
+The elements are then assembled into each global matrix describing the enitre system.
 
 \subsubsection{Undamped natural frequencies}
-To calculate the undamped natural frequencies of the shaft the three mathematical models are used. To make the system solveable a very small bearing stiffnes of \SI{0.01}{\pascal} is added.
+The eigenvalues of the global stiffness and mass matrix is found to find the natural frequencies of the system. The 4 lowest natural frequencies is found for each of the three models.
+
+To make the system solveable a very small bearing stiffnes of \SI{0.01}{\pascal} is added.
 
 \subsubsection{Convergence}
 To compare the three mathematical models, a convergence study is done. Here the 4 lowest (non rigid body) natural frequencies are compared.
@@ -70,7 +157,7 @@ The resulting natural frequencies are shown in table \ref{tab:natural_freq}.
 The experimental results from \cite[6]{Problem} is compared to the mathematical model. The experimantal natural frequencies and the discrepancy between the 3 mathematical models and the experimental results is shown in table \ref{tab:validation}.
 
 \begin{table}[htbp]
-    \begin{adjustwidth}{-1cm}{-1cm}
+    \begin{adjustwidth}{-2cm}{-2cm}
     \centering
     \caption{Validation of Mathematical Model}
     \label{tab:validation}
