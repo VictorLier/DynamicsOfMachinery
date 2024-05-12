@@ -1,33 +1,17 @@
-% This file was created by matlab2tikz.
-%
-%The latest updates can be retrieved from
-%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
-%where you can also make suggestions and rate matlab2tikz.
-%
-\definecolor{mycolor1}{rgb}{1.00000,0.00000,1.00000}%
-%
 \begin{tikzpicture}
 
 \begin{axis}[%
-width=4.521in,
-height=3.545in,
-at={(0.758in,0.502in)},
-scale only axis,
+width=0.9\linewidth,
+height=0.4\linewidth,
 xmin=0,
 xmax=15000,
-xlabel style={font=\color{white!15!black}},
-xlabel={$\text{Angular Velocity }\Omega\text{ [rpm]}$},
+xlabel={Angular Velocity ($\Omega$) [rpm]},
 ymin=0,
-ymax=300,
-ylabel style={font=\color{white!15!black}},
-ylabel={$\text{Imaginary Parts of }\lambda{}_\text{i}\text{ [Hz]}$},
-axis background/.style={fill=white},
-title style={font=\bfseries},
-title={Campbell´s Diagram - Critical Speeds},
-xmajorgrids,
-ymajorgrids
+ymax=250,
+ylabel={Imaginary Parts of $\lambda_{i}$ [\si{\hertz}]},
+grid=major,
 ]
-\addplot [color=red, line width=1.5pt, forget plot]
+\addplot [red, forget plot]
   table[row sep=crcr]{%
 60	1\\
 120	2\\
@@ -329,7 +313,7 @@ ymajorgrids
 17880	298\\
 17940	299\\
 };
-\addplot [color=black, line width=1.5pt, forget plot]
+\addplot [black, forget plot]
   table[row sep=crcr]{%
 60	0.874971235678326\\
 120	1.65028234178887\\
@@ -631,7 +615,7 @@ ymajorgrids
 17880	69.581805426246\\
 17940	69.4824660045069\\
 };
-\addplot [color=green, line width=1.5pt, forget plot]
+\addplot [green, forget plot]
   table[row sep=crcr]{%
 60	107.406805161813\\
 120	107.397589804316\\
@@ -933,7 +917,7 @@ ymajorgrids
 17880	107.039496287743\\
 17940	107.238667656429\\
 };
-\addplot [color=mycolor1, line width=1.5pt, forget plot]
+\addplot [cyan, forget plot]
   table[row sep=crcr]{%
 60	107.473294103906\\
 120	107.574980911479\\

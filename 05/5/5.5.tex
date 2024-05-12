@@ -1,26 +1,17 @@
-% This file was created by matlab2tikz.
-%
-%The latest updates can be retrieved from
-%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
-%where you can also make suggestions and rate matlab2tikz.
-%
-\definecolor{mycolor1}{rgb}{1.00000,0.00000,1.00000}%
-\definecolor{mycolor2}{rgb}{1.00000,1.00000,0.00000}%
-%
 \begin{tikzpicture}
 
 \begin{axis}[%
 width=0.9\linewidth,
-height=0.5\linewidth,
+height=0.4\linewidth,
 ymin=-300,
 ymax=50,
 xmin=0,
 xmax=8000,
-xlabel={$\text{Angular Velocity }\Omega\text{ [rpm]}$},
-ylabel={$\text{Real Parts of }\lambda{}_\text{i}\text{ [rad/s]}$},
+xlabel={Angular Velocity ($\Omega$) [rpm]},
+ylabel={Real Parts of $\lambda_i$ [rad/s]},
 grid=major,
 ]
-\addplot [color=black, line width=1.5pt, forget plot]
+\addplot [black, forget plot]
   table[row sep=crcr]{%
 60	-15.9535237713727\\
 120	-27.0027681574936\\
@@ -322,7 +313,7 @@ grid=major,
 17880	167.754317902954\\
 17940	168.359819764138\\
 };
-\addplot [color=red, line width=1.5pt, forget plot]
+\addplot [red, forget plot]
   table[row sep=crcr]{%
 60	-0.634785090911355\\
 120	-1.57326730805758\\
@@ -624,7 +615,7 @@ grid=major,
 17880	-991.48660187197\\
 17940	-991.699885789654\\
 };
-\addplot [color=mycolor1, line width=1.5pt, forget plot]
+\addplot [green, forget plot]
   table[row sep=crcr]{%
 60	-45.6324568226401\\
 120	-73.3489573695338\\
@@ -926,7 +917,7 @@ grid=major,
 17880	-71.1596972852874\\
 17940	-70.4515752622843\\
 };
-\addplot [color=mycolor2, line width=1.5pt, forget plot]
+\addplot [yellow, forget plot]
   table[row sep=crcr]{%
 60	-0.407376310136437\\
 120	-1.0084815909232\\
@@ -1228,7 +1219,7 @@ grid=major,
 17880	-17.1578232458316\\
 17940	-17.3198953312503\\
 };
-\addplot [color=green, line width=1.5pt, forget plot]
+\addplot [blue, forget plot]
   table[row sep=crcr]{%
 60	-18.7904124394339\\
 120	-25.0238492890537\\
@@ -1530,7 +1521,12 @@ grid=major,
 17880	-180.048723050509\\
 17940	-180.599748536278\\
 };
-\addplot[black, dashed, samples=2] {0};
+\addplot [color=black, dashed, forget plot]
+  table[row sep=crcr]{%
+0	0\\
+8000	0\\
+};
 \end{axis}
+
 
 \end{tikzpicture}%
